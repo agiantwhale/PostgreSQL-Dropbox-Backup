@@ -69,3 +69,6 @@ eval "PGPASSWORD=$password pg_dump -U $user $database > $filepath"
 
 # Upload the dump.
 source $uploader_file upload $filepath /
+
+# Delete the dump.
+rm -rf $filepath
