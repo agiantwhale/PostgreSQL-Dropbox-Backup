@@ -67,8 +67,15 @@ filepath="$dump_folder/$(date +%s).dump"
 # Now, dump all of that on to a temporary file.
 eval "PGPASSWORD=$password pg_dump -U $user $database > $filepath"
 
+# Dermine the destination
+DEST="/"
+if [ -n $DESTINATION ];
+then
+   let DEST=$DESTINATION;
+fi
+
 # Upload the dump.
-source $uploader_file upload $filepath /
+source $uploader_file upload $filepath $DEST
 
 # Delete the dump.
 rm $filepath
